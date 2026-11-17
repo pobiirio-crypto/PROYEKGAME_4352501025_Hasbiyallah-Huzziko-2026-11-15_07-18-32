@@ -67,5 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "PROYEKGAME_4352501025_Hasbiyallah Huzziko.slnx"
+    "dotnet.defaultSolution": "PROYEKGAME_4352501025_Hasbiyallah Huzziko.slnx",
+    "gitdoc.enabled": true
 }

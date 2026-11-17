@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameBootstrap : MonoBehaviour
 {
@@ -8,15 +9,23 @@ public class GameBootstrap : MonoBehaviour
     private IMoveInput moveInput;
     private IActionInput actionInput;
 
-    void Awake()
+    private void Awake()
     {
+        InputSystem.actions.Enable();
+
         moveInput = new InputSystemMoveInput();
         actionInput = new InputSystemActionInput();
     }
 
-    IEnumerator Start()
+    private IEnumerator Start()
     {
         yield return SceneManager.LoadSceneAsync(firstScene, LoadSceneMode.Additive);
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(firstScene));
+
+        WorldInstaller installer = FindFirstObjectByType<WorldInstaller>();
+        if (installer != null)
+        {
+            installer.Install(moveInput, actionInput);
+        }
     }
 }
